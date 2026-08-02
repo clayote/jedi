@@ -415,6 +415,8 @@ class UnresolvableParamName(ParamNameInterface, AbstractNameDefinition):
 
 class CompiledValueName(ValueNameMixin, AbstractNameDefinition):
     def __init__(self, value, name):
+        if not hasattr(name, "start_pos"):
+            name.start_pos = value.atom.start_pos
         self.string_name = name
         self._value = value
         self.parent_context = value.parent_context
